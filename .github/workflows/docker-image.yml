@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    tags:
+      - "v*.*.*"
 
 jobs:
   docker:
@@ -31,4 +30,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ev357/wakatime-proxy:latest
+          tags: |
+            ev357/wakatime-proxy:latest
+            ev357/wakatime-proxy:${{ github.ref }}
