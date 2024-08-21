@@ -36,7 +36,7 @@ func main() {
 			return req, nil
 		})
 
-	// proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
+	proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
 
 	portEnv := os.Getenv("PORT")
 	if portEnv == "" {
