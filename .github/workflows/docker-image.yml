@@ -30,6 +30,12 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
+          images: ev357/wakatime-proxy
           tags: |
-            ev357/wakatime-proxy:latest
-            ev357/wakatime-proxy:${{ github.ref }}
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
