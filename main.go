@@ -42,7 +42,7 @@ func main() {
 	if portEnv == "" {
 		portEnv = "3000"
 	}
-	port, err := strconv.Atoi(portEnv)
+	port, err := strconv.Atoi(portEnv)	// proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
 
 	if err != nil {
 		log.Fatalf("Invalid port number: %s\n", portEnv)
