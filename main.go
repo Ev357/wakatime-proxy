@@ -25,8 +25,8 @@ func main() {
 			err := json.Unmarshal([]byte(headersEnv), &headers)
 
 			if err != nil {
-				log.Printf("Error unmarshalling JSON: %v", err)
-				return req, nil
+				log.Printf("Error unmarshalling JSON: %v\n", err)
+				return req, goproxy.NewResponse(req, goproxy.ContentTypeText, http.StatusInternalServerError, fmt.Sprintf("Internal Server Error: %v\n", err))
 			}
 
 			for key, value := range headers {
