@@ -38,11 +38,16 @@ func main() {
 
 	proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
 
+	host := os.Getenv("HOST")
+	if host == "" {
+		host = "0.0.0.0"
+	}
+
 	portEnv := os.Getenv("PORT")
 	if portEnv == "" {
 		portEnv = "3000"
 	}
-	port, err := strconv.Atoi(portEnv)	// proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
+	port, err := strconv.Atoi(portEnv)
 
 	if err != nil {
 		log.Fatalf("Invalid port number: %s\n", portEnv)
@@ -60,8 +65,8 @@ func main() {
 
 	proxy.Verbose = verbose
 
-	log.Printf("Proxy server is running on http://localhost:%d", port)
-	listenErr := http.ListenAndServe(fmt.Sprintf(":%d", port), proxy)
+	log.Printf("Proxy server is running on http://%s:%d", host, port)
+	listenErr := http.ListenAndServe(fmt.Sprintf("%s:%d", host, port), proxy)
 
 	if listenErr != nil {
 		log.Fatalf("Failed to start server: %v", listenErr)
