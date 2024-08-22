@@ -24,6 +24,13 @@ You can configure it using a `.env` file or by setting environment variables:
 PORT=3080 ./wakatime-proxy
 ```
 
+### Go Install
+```
+go install github.com/Ev357/wakatime-proxy@latest
+```
+
+The binary will be located in `$HOME/go/bin`.
+
 ## Configuration
 Wakatime Proxy can be configured using the following environment variables:
 - `HEADERS`: JSON object representing the headers to be added to the requests. Example: `{"token": "123"}`.
