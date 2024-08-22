@@ -1,4 +1,4 @@
-FROM golang:1.23
+FROM golang:1.23 AS build-stage
 
 WORKDIR /app
 
@@ -9,6 +9,14 @@ COPY *.go ./
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /wakatime-proxy
 
-EXPOSE 3000
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
-CMD ["/wakatime-proxy"]
+WORKDIR /
+
+COPY --from=build-stage /wakatime-proxy /wakatime-proxy
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/wakatime-proxy"]
