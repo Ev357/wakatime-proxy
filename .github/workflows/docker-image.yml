@@ -15,7 +15,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ev357/wakatime-proxy
-          flavor: latest=auto
           tags: |
             type=schedule
             type=ref,event=branch
